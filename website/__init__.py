@@ -1,12 +1,12 @@
 from flask import Flask
 
 def create_app():
-    app = Flask(__name__)
-    app.config['SECRET_KEY'] = "helloworld"
+    application = Flask(__name__)
+    application.config['SECRET_KEY'] = "helloworld"
 
     from .views import views
 
-    app.register_blueprint(views, url_prefix="/")
+    application.register_blueprint(views, url_prefix="/")
 
 
-    return app
+    return application
