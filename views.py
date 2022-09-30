@@ -19,5 +19,9 @@ def contact():
 def post():
     return render_template("post.html")
 
+@views.route("/post_f1")
+def post_f1():
+    return render_template("post_f1.html")
+
 
 
