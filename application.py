@@ -5,5 +5,3 @@ application = Flask(__name__)
 # application.config['SECRET_KEY'] = "randomstring"
 application.register_blueprint(views, url_prefix="/")
 # application.run(debug=True)
-
-

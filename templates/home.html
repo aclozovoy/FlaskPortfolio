@@ -19,55 +19,58 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            <!-- Post 1 preview-->
+            <!-- Wikipedia Post preview-->
             <div class="post-preview">
-                <a href="post1.html">
-                    <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
-                    <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+                <a href="{{ url_for('views.post_wikipedia') }}">
+                    <h2 class="post-title">Tracking Wikipedia Page Views</h2>
+                    <h3 class="post-subtitle">Creating a data pipeline and dashboard to track viewcounts of Wikipedia pages over time.</h3>
                 </a>
                 <p class="post-meta">
                     Posted by
                     <a href="{{ url_for('views.about') }}">Andrew</a>
-                    on September 24, 2022
+                    on September 28, 2022
                 </p>
             </div>
             <!-- Divider-->
             <hr class="my-4" />
-            <!-- Post 2 preview-->
+            <!-- URM Post preview-->
             <div class="post-preview">
-                <a href="post2.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
+                <a href="{{ url_for('views.post_urm') }}">
+                    <h2 class="post-title">Portland URM Building Dashboard</h2>
+                    <h3 class="post-subtitle">Identifying unreinforced masonry buildings in Portland, Oregon.</h3>
+                </a>
                 <p class="post-meta">
                     Posted by
                     <a href="{{ url_for('views.about') }}">Andrew</a>
-                    on September 18, 2022
+                    on September 19, 2022
                 </p>
             </div>
             <!-- Divider-->
             <hr class="my-4" />
-            <!-- Post 3 preview-->
+            <!-- F1 Post preview-->
             <div class="post-preview">
-                <a href="post3.html">
-                    <h2 class="post-title">Science has not yet mastered prophecy</h2>
-                    <h3 class="post-subtitle">We predict too much for the next year and yet far too little for the next ten.</h3>
+                <a href="{{ url_for('views.post_f1') }}">
+                    <h2 class="post-title">Formula One Data Exploration</h2>
+                    <h3 class="post-subtitle">Vroom Vroom Vroom Vroom</h3>
+                </a>
+                <p class="post-meta">
+                    Posted by
+                    <a href="{{ url_for('views.about') }}">Andrew</a>
+                    on September 6, 2022
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            <!-- Baseball Post preview-->
+            <div class="post-preview">
+                <a href="{{ url_for('views.post_baseball') }}">
+                    <h2 class="post-title">Baseball Hall of Fame Voting</h2>
+                    <h3 class="post-subtitle">Exploring the trends of voting for the Baseball Hall of Fame</h3>
                 </a>
                 <p class="post-meta">
                     Posted by
                     <a href="{{ url_for('views.about') }}">Andrew</a>
                     on August 24, 2022
-                </p>
-            </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-            <!-- Post 4 preview-->
-            <div class="post-preview">
-                <a href="post4.html">
-                    <h2 class="post-title">Failure is not an option</h2>
-                    <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="{{ url_for('views.about') }}">Andrew</a>
-                    on July 8, 2022
                 </p>
             </div>
             <!-- Divider-->

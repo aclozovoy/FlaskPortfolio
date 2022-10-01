@@ -23,5 +23,15 @@ def post():
 def post_f1():
     return render_template("post_f1.html")
 
+@views.route("/post_urm")
+def post_urm():
+    return render_template("post_urm.html")
 
+@views.route("/post_baseball")
+def post_baseball():
+    return render_template("post_baseball.html")
+
+@views.route("/post_wikipedia")
+def post_wikipedia():
+    return render_template("post_wikipedia.html")
 

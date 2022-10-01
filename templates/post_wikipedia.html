@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Post Template{% endblock %}
+
+{% block content %}
+
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url(static/assets/img/wikipedia-header.jpg)">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>Tracking Wikipedia Page Views</h1>
+                            <h2 class="subheading">Creating a data pipeline and dashboard to track viewcounts of Wikipedia pages over time.</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="{{ url_for('views.about') }}">Andrew</a>
+                                on September 28, 2022
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>
+                            Having a good grasp on SQL, I wanted to create a project with a relational database.
+                            There are many online options for practicing queries, but I wanted to build experience setting up a database, creating tables, and adding data.
+                            I also knew that I wanted to use data with regular updates that I could pull from an API.
+                            After exploring several options, I decided to build a dashboard that tracks Wikipedia page views per day.
+                            The dashboard can be viewed <a href="https://public.tableau.com/app/profile/andrew.lozovoy/viz/WikipediaPageViews_16612873165990/InfoPage">here</a>.
+                        </p>
+                        <h2 class="section-heading">Building the Data Pipeline and Dashboard</h2>
+                        <p>
+                            I needed to choose which Wikipeda pages I was going to track.
+                            I settled on a list of several: US states, countries, and American professional sports teams.
+                            The list of pages and their category is stored in a .txt file that can easily be added to in the future.
+                            (Send me an email if you have any suggestions!)
+                        </p>
+                        <p>
+                            The first step was to establish API calls to <a href="https://en.wikipedia.org/api/rest_v1/">Wikimedia</a> for a single Wikipedia page.
+                            Each call takes the page name, start date, and end date and returns a json with the page views for each day in that range.
+                            I used the Python with the Pandas library to extract the data out of the json and store it in a DataFrame.
+                            The data is stored as a table in a DataFrame.
+                        </p>
+                        <p>
+                            The next step was to create a database to store the Wikipedia page views data.
+                            I opted to use an Amazon RDS (Relational Database Service) database due to its ease of setup and not having to run the server myself.
+                            Thanks to a YouTube tutorial and online documentation, I was able to get the database up and running in a single day.
+                            Now I just needed to add the data!
+                        </p>
+                        <a href="#!"><img class="img-fluid" src="static/assets/img/wikipedia-mysql.jpg" alt="..." /></a>
+                        <span class="caption text-muted">Using MySQL Workbench to view and query my database</span>
+                        <p>
+                            I used the Python library PyMySQL to interface between my Pandas DataFrame and my new database.
+                            Adding data was mostly straightforward, but I ran into a problem: each time the script was run, the existing data would be duplicated.
+                            I ultimately solved this problem in two ways.
+                            The first was to write a INSERT INTO statement that would only add the new data.
+                            This worked well but was very inefficient because my database needed to process all of these statements, even when the vast majority would be thrown out duplicates.
+                            I really needed to revise my API calls to limit to duplicate data to begin with.
+                            Now before making an API call, I query the database to establish what dates are already in the database.
+                            Then, the API call will only ask for data outside of this range.
+                            This change greatly reduced the amount data processing and sped up the script.
+                        </p>
+                        <p>
+                            Once the page view data was in my RDS database, it was time to open up Tableau.
+                            It was straightforward to connect Tableau to my database, and start exploring the data.
+                            I created several charts and maps and published them to Tableau Public.
+                        </p>
+                        <h2 class="section-heading">Automation</h2>
+                        <p>
+                            My Python script needs to run once per day to keep my database up to date.
+                            I wanted a way to automate this script so I don't have to open the file and run it manually every day.
+                            I decided to use crontab, a scheduling tool built into macOS.
+                            I had never used it before, but some reading and tutorials I was able to get it running.
+                            I considered using AWS Lambda to automatically run my script, but my personal comuter is turned on most of the time, and my script will recover any missing days, so there was little need to for a cloud service.
+                            I look forward to finding a different use case for AWS Lambda in the future.
+                        </p>
+                        <p>
+                            Unfortunately, the automation does not carry all the way through to the Tableau dashboard.
+                            I can use a live conneciton to my database, but I still need to manually publish each new version to Tableau Public.
+                            There are ways around this, but all require an expensive subscription.
+                            For the time being I still need to periodically open Tableau, refresh data, and resave to Tableau Public.
+                        </p>
+                        <h2 class="section-heading">Insights</h2>
+                        <p>
+                            Now that my dashboard was created, I spent some time digging it the data.
+                            We see huge spikes for Ukraine in February and for Bangladesh in late Auguset.
+                            Ukraine's spike is clearly from the Russian invasion, although I am less certain about Bangladesh.
+                            <a href="https://www.reuters.com/article/bangladesh-russia-wheat-idAFL4N30404L">This news article</a> suggests that the spike in interest may have been due to a wheat deal signed with Russia.
+                        </p>
+                        <p>
+                            I found something else intersting in the US States data.
+                            From July to early August, the state of Maryland dominated Wikipedia page views, and I can't figure out why.
+                        </p>
+                        <a href="https://en.wikipedia.org/wiki/Maryland"><img class="img-fluid" src="static/assets/img/wikipedia-crab.webp" alt="..." /></a>
+                        <span class="caption text-muted">Everyone wants some Maryland crab?</span>
+                        <p>
+                            I added state and country populations to my dataset to see which states or countries were more relavent that their population would suggest.
+                            The US winner was Alaska and the top country was Iceland. This makes sense as both are travel destinations with small local populations.
+                        </p>
+                        <p>
+                            The sports team data was pretty much as expected.
+                            Views increase greatly for the teams in the playoffs and then drop off sharply once the season is over.
+                            Unfortunately these high outliers skew the y-axis scale for the rest of the data.
+                            In the future I'd like to add the option to let the user choose the maximum y-axis value.
+                        </p>
+                        <h2 class="section-heading">Final Thoughts</h2>
+                        <p>
+                            This project was great practice of API calls, cleaning json files, using SQL within Python to interface with a database, creating dashboards, and scheduling files to run locally.
+                            These are all valuable skills that I will take with me to future projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+{% endblock %}
