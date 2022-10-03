@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Post Template{% endblock %}
+{% block title %}Baseball Hall of Fame Voting{% endblock %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="post-heading">
                             <h1>Baseball Hall of Fame</h1>
-                            <h2 class="subheading">Exploring the trends of voting for the Baseball Hall of Fame</h2>
+                            <h2 class="subheading">Exploring the trends of voting for the Baseball Hall of Fame.</h2>
                             <span class="meta">
                                 Posted by
                                 <a href="{{ url_for('views.about') }}">Andrew</a>
@@ -28,52 +28,73 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <h2 class="section-heading">Background</h2>
                         <p>
-                            Formula 1 is a auto racing series that takes drivers any teams around the world as the strive
-                            to design, build, and race the fastest car they can within the rules, or "formula".
-                            Each season the rules are changed and the teams need to adapt.
-                            These changes are for safety, sustainability, cost control, better racing, and to keep the teams having to adapt.
-                            Most years involve minor changes
+                            This post is about a Tableau dashboard that can be viewed <a href="https://public.tableau.com/app/profile/andrew.lozovoy/viz/BaseballHallofFameVoting/InfoPage">here</a>.
                         </p>
                         <p>
-                            The 2022 season introduced some of the most substantial changes ever.
-                            The changes promised to cut costs, allow the cars to race closer together, and create a more even field.
-                            The first two have proved to be successful.
-                            A cost cap limits how much money teams can spend, in theory allowing the smaller teams to compete with the top 3 teams.
-                            We have seen several instances where the new cars are successfully able to race side by side SILVERSTONE.
-                            But because the cars are built by separate teams, there is still a possibility that some teams get it right and others don't.
-                            After all, the last major rules change in 2014 led 8 straight years of Mercedes dominating the constructors championship.
-                            I wanted to investigate how closely the teams are to each other, and if in season development is moving them closer together or further apart.
+                            I've know about the idea web scraping for years, but I had never done it myself.
+                            It was time for that to change!
+                            As a baseball fan, I knew that baseball-reference.com was the go to site for all things baseball data.
+                            I wanted to look at baseball data in a new lens.
+                            There are countless professionals working to create advanced stats and trying to squeeze every ounce out of the analytics, but I wanted to find something new.
+                            I found the Hall of Fame voting pages.
+                            For each year, they show a table of the players who were on the Hall of Fame ballot that year, and the voting results.
+                            I wanted to explore if voting trajectories meant anything about the quality of player.
+                            THIS SECTION NEEDS IMPROVING
                         </p>
-                        <h2 class="section-heading">Data Exploration</h2>
+                        <h2 class="section-heading">Building a Web Scraper</h2>
                         <p>
-                            I started investigating F1 data last year using the fastf1 Python library.
-                            I made some plots using matplotlib and tracked the gap between drivers during races including the USGP and Brazilian Grands Prix.
+                            I used the Python library Beautiful Soup to scrape the Baseball Reference website.
+                            It took quite a while to understand the structure of the HTML and parse out the data into a DataFrame.
+                            It wasn't very difficult, but it was a time consuming and tedious task.
+                            Once I had data from a single page, it was easy to loop through all of the voting years since the 1930s.
                         </p>
+                        
                         <p>
-                            When I came back to F1 data, I wanted to do it without the fastf1 library.
-                            It had given me some problems before, and I wanted to handle the data myself.
-                            I found the egcast? API and used it to call for data from specific qualifying sessions.
-                            I used qualifying data as it allows us to see the peak performance of the cars without the traffic that occurs during the actual race.
-                        </p>
-                        <p>
-                            The API returns a json with each driver an their times in the qualifying sessions.
-                            The 20 drivers all participate in "Q1".
-                            The top 15 advance to "Q2" and then the top 10 of "Q2" advance to "Q3" to set their final qualifying positions.
-                            For each driver, I established their qualifying time as the fastest time in the last session they were part of.
-                            This also required converting a string time "1:32.187" to number.
+                            I needed to clean several columns of data.
+                            For example, "Year on Ballot" was listed as a string: "1st", "2nd", "3rd", etc.
+                            I transformed this into an integer so that I would be able to plot it in Tableau.
                         </p>
                         <p>
-                            I converted each qualifying time to a percentage off the fastest time so that we can fairly compare teams when each track has a unique length.
-                            Each team has two driver, so I also calculated the average time for each team.
+                            Each player's career statistics are shown for each year they were on the ballot.
+                            This created lots of duplicate data. I decided to clean this up and split the data into two separate DataFrames.
+                            This first contained each player on at least one ballot and their career statistics.
+                            The second had each player listed for each year they were on the ballot, and the results of that vote.
                         </p>
                         <p>
-                            I plotted the times using the Python library Seaborn.
-                            I've wanted to use this for a while, and this project felt like a great opportunity to learn.
-                            It made it very easy to quickly create a scatterplot and overlay the team times as a line graph.
+                            I then saved the DataFrames as .csv files to open in Tableau.
+                        </p>
+                        <h2 class="section-heading">Tableau</h2>
+                        <p>
+                            I used a relationship in Tableau to connect the two tables, and  then created a plot showing voting percentages by year.
+                            This gave me what I was looking for. Each line was a player and it was easy to see their voting trajectories.
+                            I used color to show a player's career WAR. This stands for Wins Above Replacement and reduces a players value to a single number.
+                            It certainly doesn't capture everything about a player, but it provides an easy way to see where public perception (voting) agrees or disagrees with statistical value (WAR).
+                            Some notable players are Barry Bonds and Roger Clements who have very high WAR values but never reached the 70% voting mark due to their connections with steroids.
+                            We also see players like Bruce Sutter who was voted in despite a low career WAR of only 24.0.
+                            That's not to say he isn't worthy, but it is interesting LINK
+                        </p>
+                        <p>
+                            I decided to recreate the same dashboard, but use "Year on Ballot" as the x-axis rather than year.
+                            This provides a better comparison of all the voting trajectories
                         </p>
                         <h2 class="section-heading">Insights and Conclusions</h2>
                         <p>
-                            These are my great insights and conclusions.
+                            Lee Smith has the highest first year voting (42.3%) to not make the Hall of Fame.
+                            Many HOF players started with a lower percentage, but For players who clear this benchmark in their first voting year, it is a near certainty that they will reach 70% eventually.
+                        </p>
+                        <p>
+                            The average HOFer players just over 19 seasons in their career.
+                            This is much higher than the league average, and stands to show how important both peak and longevity are to HOF voters.
+                        </p>
+                        <p>
+                            I noticed a few values for which it appears the Baseball Reference data is erroneous.
+                            I opted not to clean this up since I don't have any way to verify, and arbitrary cleaning based on my impressions of the data is not a very scientific method to follow.
+                            It is better to just show all the data than for it to be arbitrary redacted.
+                        </p>
+                        <h2 class="section-heading">Takeaways</h2>
+                        <p>
+                            As a project to build a web scraper, this project was very successful.
+                            I now have another tool for pulling data into my projects and I can't wait to find new opportunities use it again.
                         </p>
                     </div>
                 </div>
