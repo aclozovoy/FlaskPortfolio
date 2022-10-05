@@ -46,7 +46,8 @@
                             It wasn't very difficult, but it was a time consuming and tedious task.
                             Once I had data from a single page, it was easy to loop through all of the voting years since the 1930s.
                         </p>
-                        
+                        <a href="https://www.baseball-reference.com/awards/hof_2020.shtml"><img class="img-fluid" src="static/assets/img/baseball-ref.jpg" alt="..." /></a>
+                        <span class="caption text-muted">Baseball Reference Hall of Fame Voting page for 2020.</span>
                         <p>
                             I needed to clean several columns of data.
                             As an example, on Baseball Reference "Year on Ballot" was listed as a string: "1st", "2nd", "3rd", etc.
@@ -78,12 +79,12 @@
                         </p>
                         <h2 class="section-heading">Insights and Conclusions</h2>
                         <p>
-                            I made a scatterplot with Years On Ballot and Career WAR as the axis and
-                            limited it to only players who did eventually make it into the Hall of Fame.
+                            I made a scatterplot showing Years On Ballot vs. Career WAR and limited it to players who made the Hall of Fame.
                             We see that the better players (greater WAR) do make it into the Hall of Fame sooner, although the correlation is very weak (R-squared = 0.16).
+                            This shows that much of a players reputation is defined by things outside of their statistics (or at least not well captured by WAR).
                         </p>
                         <a href="#!"><img class="img-fluid" src="static/assets/img/baseball-scatter.jpg" alt="..." /></a>
-                        <span class="caption text-muted">R-squared of 0.16 means there is very little correlation between Career WAR and Years On Ballot for those who made it into the HOF.</span>
+                        <span class="caption text-muted">R-squared of 0.16 means there is very little correlation between Career WAR and how quickly Hall of Famers made it in.</span>
                         <p>
                             Lee Smith has the highest first year voting (42.3%) to not make the Hall of Fame.
                             Many HOF players started with a lower percentage, but For players who clear this benchmark in their first voting year, it is a near certainty that they will reach 70% eventually.
@@ -101,6 +102,7 @@
                         <p>
                             As a project to build a web scraper, this project was very successful.
                             I now have another tool for pulling data into my projects and I can't wait to find new opportunities use it again.
+                            As a baseball fan, it was fun to dig in to the data and see which players were over or under valued by the voters.
                         </p>
                     </div>
                 </div>
