@@ -31,19 +31,17 @@
                             Formula 1 is a auto racing series that takes drivers any teams around the world as the strive
                             to design, build, and race the fastest car they can within the rules, or "formula".
                             Each season the rules are changed and the teams need to adapt.
-                            These changes are for safety, sustainability, cost control, better racing, and to keep the teams having to adapt.
-                            Most years involve minor changes
+                            Most years involve minor changes, but occasionally they are much bigger.
                         </p>
                         <p>
                             The 2022 season introduced some of the most substantial changes ever.
-                            The changes promised to cut costs, allow the cars to race closer together, and create a more even field.
-                            The first two have proved to be successful.
-                            A cost cap limits how much money teams can spend, in theory allowing the smaller teams to compete with the top 3 teams.
-                            We have seen several instances where the new cars are successfully able to race side by side SILVERSTONE.
-                            But because the cars are built by separate teams, there is still a possibility that some teams get it right and others don't.
-                            After all, the last major rules change in 2014 led 8 straight years of Mercedes dominating the constructors championship.
-                            I wanted to investigate how closely the teams are to each other, and if in season development is moving them closer together or further apart.
+                            Among other goals, the new cars were promised to be the most equal ever in terms of performance.
+                            The last major rules change in 2014 led 8 straight years of Mercedes dominating the constructors championship.
+                            While impressive for Mercedes, mosts fans agree that the racing is not as exciting when other teams can't keep up.
+                            I wanted to investigate how closely the teams are to each other and see if the goal has been successful.
                         </p>
+                        <a href="#!"><img class="img-fluid" src="static/assets/img/f1-mercedes.jpg" alt="..." /></a>
+                        <span class="caption text-muted">Mercedes celebrating one of their eight consecutive championships</span>
                         <h2 class="section-heading">Data Exploration</h2>
                         <p>
                             I started investigating F1 data last year using the fastf1 Python library.
@@ -51,16 +49,18 @@
                         </p>
                         <p>
                             When I came back to F1 data, I wanted to do it without the fastf1 library.
-                            It had given me some problems before, and I wanted to handle the data myself.
-                            I found the egcast? API and used it to call for data from specific qualifying sessions.
-                            I used qualifying data as it allows us to see the peak performance of the cars without the traffic that occurs during the actual race.
+                            Unfortunately, the library only has data from 2018 and on.
+                            I wanted data going back further
+                            I found the <a href="http://ergast.com/mrd/">Ergcast API</a> which has qualifying data going back to 2005.
+                            Qualifying times allow us to measure the performance of the cars on track without the traffic they encounter during the race.
                         </p>
                         <p>
                             The API returns a json with each driver an their times in the qualifying sessions.
-                            The 20 drivers all participate in "Q1".
+                            This data was cleaned up and then organized in a Pandas DataFrame.
+                            For example, the string time "1:32.187" needed to be converted into a number.
+                            <!-- The 20 drivers all participate in "Q1".
                             The top 15 advance to "Q2" and then the top 10 of "Q2" advance to "Q3" to set their final qualifying positions.
-                            For each driver, I established their qualifying time as the fastest time in the last session they were part of.
-                            This also required converting a string time "1:32.187" to number.
+                            For each driver, I established their qualifying time as the fastest time in the last session they were part of. -->
                         </p>
                         <p>
                             I converted each qualifying time to a percentage off the fastest time so that we can fairly compare teams when each track has a unique length.
@@ -69,11 +69,20 @@
                         <p>
                             I plotted the times using the Python library Seaborn.
                             I've wanted to use this for a while, and this project felt like a great opportunity to learn.
-                            It made it very easy to quickly create a scatterplot and overlay the team times as a line graph.
+                            It made it very easy to quickly create a scatterplot and define the colors for each team.
                         </p>
+                        <a href="#!"><img class="img-fluid" src="static/assets/img/f1-scatter.png" alt="..." /></a>
+                        <span class="caption text-muted">Scatterplot of qualifying times by race in 2022.</span>
                         <h2 class="section-heading">Insights and Conclusions</h2>
                         <p>
-                            These are my great insights and conclusions.
+                            So far, we don't see any obvious trends in car performance so far this year.
+                            However, there is still more work that I need to do.
+                            The first step is to remove rainy qualifying sessions because they are very unpredictable and not representative of true car performance.
+                            Next, I need to remove slow outliers to eliminate when drivers didn't complete a clean lap.
+                            Then I can explore team trends, correlation between teammates, and the distribution of cars across different seasons.
+                        </p>
+                        <p>
+                            This project is ongoing. Come back soon to check for new developments!
                         </p>
                     </div>
                 </div>
