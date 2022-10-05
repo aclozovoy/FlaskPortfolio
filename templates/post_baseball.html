@@ -34,12 +34,10 @@
                             I've know about web scraping for years, but I had never done it myself.
                             So, I wanted to create a project where I would use a web scraper and then organize and visualize the data.
                             As a baseball fan, I knew that baseball-reference.com was the go to site for all things baseball data.
-                            I wanted to look at baseball data in a new lens.
-                            There are countless professionals working to create advanced stats and trying to squeeze every ounce out of the analytics, but I wanted to find something new.
-                            I found the Hall of Fame voting pages.
+                            I searched through the site and found found the Hall of Fame voting pages.
                             For each year, they show a table of the players who were on the Hall of Fame ballot that year, and the voting results.
-                            I wanted to explore if voting trajectories meant anything about the quality of player.
-                            THIS SECTION NEEDS IMPROVING
+                            This seemed like a good opportunity to look at data that hadn't already been analyzed in hundreds of different ways.
+                            I decided to explore if voting trajectories and see if it was correlated with the quality of the player.
                         </p>
                         <h2 class="section-heading">Building a Web Scraper</h2>
                         <p>
@@ -65,19 +63,27 @@
                         </p>
                         <h2 class="section-heading">Tableau</h2>
                         <p>
-                            I used a relationship in Tableau to connect the two tables, and  then created a plot showing voting percentages by year.
+                            I used a relationship in Tableau to connect the two tables and then created a plot showing voting percentages by year.
                             This gave me what I was looking for. Each line was a player and it was easy to see their voting trajectories.
                             I used color to show a player's career WAR. This stands for Wins Above Replacement and reduces a players value to a single number.
                             It certainly doesn't capture everything about a player, but it provides an easy way to see where public perception (voting) agrees or disagrees with statistical value (WAR).
                             Some notable players are Barry Bonds and Roger Clements who have very high WAR values but never reached the 70% voting mark due to their connections with steroids.
-                            We also see players like Bruce Sutter who was voted in despite a low career WAR of only 24.0.
-                            That's not to say he isn't worthy, but it is interesting LINK
+                            We also see players like <a href ="https://www.cooperstowncred.com/bruce-sutter-split-fingered-pioneer/">Bruce Sutter</a> who was voted in despite a low career WAR of only 24.0.
+                            That's not to say he isn't worthy, but it is interesting outlier.
                         </p>
                         <p>
                             I decided to recreate the same dashboard, but use "Year on Ballot" as the x-axis rather than year.
-                            This provides a better comparison of all the voting trajectories
+                            This provides a better comparison of all the voting trajectories.
+                            I used a Tableau calculated field and parameter to allow the user to choose between the X-axis options.
                         </p>
                         <h2 class="section-heading">Insights and Conclusions</h2>
+                        <p>
+                            I made a scatterplot with Years On Ballot and Career WAR as the axis and
+                            limited it to only players who did eventually make it into the Hall of Fame.
+                            We see that the better players (greater WAR) do make it into the Hall of Fame sooner, although the correlation is very weak (R-squared = 0.16).
+                        </p>
+                        <a href="#!"><img class="img-fluid" src="static/assets/img/baseball-scatter.jpg" alt="..." /></a>
+                        <span class="caption text-muted">R-squared of 0.16 means there is very little correlation between Career WAR and Years On Ballot for those who made it into the HOF.</span>
                         <p>
                             Lee Smith has the highest first year voting (42.3%) to not make the Hall of Fame.
                             Many HOF players started with a lower percentage, but For players who clear this benchmark in their first voting year, it is a near certainty that they will reach 70% eventually.

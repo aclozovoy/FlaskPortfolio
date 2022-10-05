@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}About Me{% endblock %}
+
+{% block content %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('static/assets/img/site-stars.jpeg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Site Info</h1>
+                    <span class="subheading">Creating This Website</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>
+                    This website was created using the Python web development framework Flask.
+                    It is based on a free Bootstrap theme called <a href="https://startbootstrap.com/theme/clean-blog">Clean Blog</a> from the site Start Bootstrap.
+                </p>
+                <p>
+                    The site is hosted by AWS using Elastic Beanstalk.
+                    I also used Route53 to establish a domain name and route traffic.
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
