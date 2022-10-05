@@ -4,7 +4,7 @@
 {% block content %}
 
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url(static/assets/img/urm-collapse.jpeg)">
+        <header class="masthead" style="background-image: url(static/assets/img/urm-buildings.jpeg)">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -32,8 +32,14 @@
                             The dashboard is hosted on Tableau Public and can be viewed here <a href="https://public.tableau.com/app/profile/andrew.lozovoy/viz/PortlandURMDashboard/InfoPage">here</a>.
                         </p>
                         <p>
-                            EXPLAIN URM BUILDINGS HERE. EXPLAIN WHY IT IS IMPORTANT FOR PEOPLE TO KNOW WHERE THEY ARE AND WHY THEY CAN BE DANGEROUS.
+                            Unreinforced masonry buildings were constructed prior to modern building codes and are especially vulnerable to damage or collapse during an earthquake.
+                            In regions of developed countries with high seismic risk (i.e. the US west coast), many of these buildings have been torn down or retrofitted.
+                            However, in Portland, Oregon has many of these buildings remain today as apartments, offices, restaurants, and meeting spaces.
+                            The City of Portland collects and stores information about these buildings, but it can only be accessed through a public records request.
+                            This dashboard was created using that public data to allow Portlanders to be more informed about the buildings in which they they live, work, and play.
                         </p>
+                        <a href="#!"><img class="img-fluid" src="static/assets/img/urm-collapse.jpeg" alt="..." /></a>
+                        <span class="caption text-muted">Unreinforced Masonry Buildings are prone to collapse during an earthquake.</span>
                         <h2 class="section-heading">The Process</h2>
                         <p>
                             This project was full of several false starts and dead ends.
@@ -41,35 +47,34 @@
                             This was simple enough, and a few days later I received an email with the data attached as an .xlsx file.
                             My first attempt to show this information on a map was using EasyMapMaker.com.
                             This option promised to be easy (it's in the name!) and straightforward, but the free tier was limited to 250 pins per map.
-                            My dataset would have required the Premium tier at $59 per month.
-                            I opted to avoid this cost and went in search of other map making options.
+                            Since my dataset would have required the Premium tier at $59 per month, I went searching for different map making options.
                         </p>
                         <p>
-                            It quickly  became clear that I would need to  establish the longitude and latitudinal coordinates for each of the buildings.
+                            It quickly became clear that I would need to establish the longitude and latitudinal coordinates for each of the buildings.
                             The process of obtaining coordinates from street addresses is referred to as geocoding.
                             There are several different geocoding services on the internet, and I started with Nominatim.
                             It is a free API that uses OpenStreetMap.
-                            Nominatim gave mostly accurate results, but it could not corra significant number of the properties could not be identified.
+                            Nominatim worked for the majority of the addresses, but there were still many that were incorrect or could not be found.
                             I tried to clean up my addresses as much as possible before using the service, but eventually decided to try another geocoder.
                         </p>
                         <p>
                             The next geocoder that I used was the Google Maps API.
                             This required more setup as I needed to create a Google Cloud account and establish credentials to use the API.
                             However, once everything was configured, the API ran quickly and accurately.
-                            I used pandas to merge the coordinates with  the original data, and I saved this as a .csv.
+                            I used pandas to merge the coordinates with the original data, and I saved this as a .csv.
                         </p>
                         <p>
-                            With the address coordinates in my dataset, I now needed a web mapping service to place my tags on.
+                            With the address coordinates in my dataset, I now needed a web mapping service to locate the building on.
                             I created a map in Mapbox but struggled with grouping buildings by type and providing each type with a separate colored marker.
                             At the same time, I was taking an online course on Tableau.
                             I decided to put my data into Tableau and see if I could make a better map there.
                             Ultimately, I did.
-                            Tableau made it much easier to group the buildings by type and was able to show additional information in tooltips.
+                            Tableau made it much easier to group the buildings by type, and I was able to show additional information in tooltips.
                             It also allowed me to easily make a dashboard to show information like the number of buildings in each group, the age distribution of URM buildings, and the number of URM buildings each neighborhood.
                             My experience with Mapbox showed that it is a very powerful map-making tool, but Tableau maps are better suited for this project.
                         </p>
                         <a href="https://public.tableau.com/app/profile/andrew.lozovoy/viz/PortlandURMDashboard/InfoPage"><img class="img-fluid" src="static/assets/img/urm-map.png" alt="..." /></a>
-                        <span class="caption text-muted">Unreinfroced Masonry Building map created with Tableau.</span>
+                        <span class="caption text-muted">Unreinforced Masonry Building map created with Tableau.</span>
                         <p>
                             The last step was to create navigation between the dashboard and the map.
                             I also added an info page to explain the map and dashboard.
@@ -78,11 +83,23 @@
                         </p>
                         <h2 class="section-heading">Insights and Conclusions</h2>
                         <p>
-                            These are my great insights and conclusions from the dashboard
+                            The primary goal of this dashboard is to inform citizens if they live or work in a building that is vulnerable to collapse.
+                            However, we can also gather some insights from the data.
+                            It is interesting to see the peaks and valleys in when URM buildings were constructed.
+                            The below chart largely tells the history of the city.
+                            The city exploded in the early 1900s, and many of the buildings were built out of unreinforced brick.
+                            Growth was stopped during the first world war, but then continued until the Great Depression of the 1930s.
+                            In 1946, after WWII, the city growth began again.
+                            The three peaks in URM construction tell the story of the growth of Portland.
                         </p>
+                        <a href="https://public.tableau.com/app/profile/andrew.lozovoy/viz/PortlandURMDashboard/InfoPage"><img class="img-fluid" src="static/assets/img/urm-years.jpg" alt="..." /></a>
+                        <span class="caption text-muted">Year of Construction of Unreinforced Masonry Buildings in Portland.</span>
                         <h2 class="section-heading">WHAT I LEARNED</h2>
                         <p>
-                            This is all the stuff I learned.
+                            This was a great project for me to practice my 
+                            It was my first experience with geocoding APIs and Mapbox.
+                            I also gained more experience with Pandas and Tableau.
+                            All of these skills are more tools I now have to tackle data analytics problems.
                         </p>
                     </div>
                 </div>
