@@ -39,3 +39,6 @@ def post_baseball():
 def post_wikipedia():
     return render_template("post_wikipedia.html")
 
+@views.route("/post_strava")
+def post_strava():
+    return render_template("post_strava.html")
