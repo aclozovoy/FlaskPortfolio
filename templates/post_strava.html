@@ -4,13 +4,13 @@
 {% block content %}
 
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url(static/assets/img/f1-header.jpg)">
+        <header class="masthead" style="background-image: url(static/assets/img/running.jpg)">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="post-heading">
                             <h1>Strava</h1>
-                            <h2 class="subheading">Training Comparison</h2>
+                            <h2 class="subheading">Using the Strava API to track my training progress.</h2>
                             <span class="meta">
                                 Posted by
                                 <a href="{{ url_for('views.about') }}">Andrew</a>
@@ -28,28 +28,63 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <h2 class="section-heading">Heading</h2>
                         <p>
-                            Description.
+                            Next month, I am planning to run a half marathon in San Diego.
+                            This will be the second half marathon I have run, so I wanted to compare my training progress to the first.
+                            I track all my runs with the Strava app, so I decided to use the Strava API to pull my run data and create some plots.
+                            I also took park in the Hood to Coast relay on two years, so I wanted to compare my training progress to those years as well.
                         </p>
-
-                        <a href="#!"><img class="img-fluid" src="https://publicstravaplots.s3.us-west-2.amazonaws.com/training_all.png" alt="..." /></a>
-                        <span class="caption text-muted">Caption</span>
-
-                        <h2 class="section-heading">Heading</h2>
+                        <h2 class="section-heading">Strava API</h2>
                         <p>
-                            Description.
+                            The first step was to familiarize myself with the Strava API.
+                            It has an extensive documentation that can be found <a href="https://developers.strava.com/docs/getting-started/">here</a>.
+                            Authentication was challenging, but I was able to get it working with the help of some <a href="https://www.youtube.com/watch?v=sgscChKfGyg">YouTube tutorials</a>.
+                            The process requires several steps and keys that I hadn't come across before.
+                        </p>
+                        <h2 class="section-heading">Data Processing and Plotting</h2>
+                        <p>
+                            Once I was able to pull my run data, I needed to process it and create some plots.
+                            I used the Python libraries <a href="https://pandas.pydata.org/">pandas</a> and <a href="https://seaborn.pydata.org/">seaborn</a> to process and plot the data.
+                        </p>
+                        <h2 class="section-heading">Capturing Insights</h2>
+                        <p>
+                            The first plot I created showed every run by distance leading up to race day.
+                            This required setting up a .csv table with the list of races.
+                            I then calculated the offest date for each race and considered only the runs leading up to a race.
+                        </p>
+                        <a href="#!"><img class="img-fluid" src="https://publicstravaplots.s3.us-west-2.amazonaws.com/training_all.png" alt="..." /></a>
+                        <span class="caption text-muted">All Runs Leading Up to Race Day</span>
+                        <p>
+                            While this was fun to look at, it was difficult to see the trends in my training.
+                            I decided to group my runs by week and plot the total distance run each week.
                         </p>
 
                         <a href="#!"><img class="img-fluid" src="https://publicstravaplots.s3.us-west-2.amazonaws.com/training_weeks.png" alt="..." /></a>
-                        <span class="caption text-muted">Caption</span>
-
-                        <h2 class="section-heading">Heading</h2>
+                        <span class="caption text-muted">Total Distance By Week Leading Up to Race Day</span>
                         <p>
-                            Description.
+                            This allows me to better compare the different years and plan my training to improve over previous years.
+                            It looks like I am training about the same as last year, but I have a few more weeks to go! (as of March 23, 2024)
+                        </p>
+                        <h2 class="section-heading">All Runs</h2>
+                        <p>
+                            Besides training for a specific race, I also wanted to see how my running has changed over the years.
+                            I made a plot of every run I have done since I started using Strava in 2015.
+                            From this, I can see that I am running more and more each year!
+                            I added a goal for myself to run 366 miles in 2024, which is a mile a day.
+                            On the plot, I made a dashed line for this goal and calculated a delta to track my progress.
                         </p>
 
                         <a href="#!"><img class="img-fluid" src="https://publicstravaplots.s3.us-west-2.amazonaws.com/distance_by_year.png" alt="..." /></a>
-                        <span class="caption text-muted">Caption</span>
+                        <span class="caption text-muted">Total Distance Run By Year</span>
 
+                        <h2 class="section-heading">Deployment</h2>
+                        <p>
+                            An important piece of this project was to make the plots update nightly and deploy them to the web.
+                            I used the Python library <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/index.html">boto3</a> to upload my plots to an AWS S3 bucket upon creation.
+                            I am then able to reference the plots in this write-up and share them with friends!
+                            I used Docker to containerize the application and build an image on my local machine.
+                            With a single command, I can run the container and refresh the plots online.
+                            The last step is to deploy the container to an AWS EC2 instance and run it nightly.
+                        </p>
                     </div>
                 </div>
             </div>

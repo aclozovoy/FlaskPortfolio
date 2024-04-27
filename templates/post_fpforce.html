@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}FpForce.net{% endblock %}
+
+{% block content %}
+
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url(static/assets/img/fpforce.jpeg)">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1>FpForce.net</h1>
+                            <h2 class="subheading">Building a web app for structural engineers.</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="{{ url_for('views.about') }}">Andrew</a>
+                                on October 12, 2023
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <h2 class="section-heading">Background</h2>
+                        <p>
+                            This write-up is about how I build a web application for structural engineers to calculate nonstructural seismic forces.
+                            The web application is live and can be used here: <a href="https://fpforce.net">fpforce.net</a>.
+                        </p>
+                        <p>
+                            Nonstructural seismic forces are the forces that occur during an earthquake that are not due to the weight of the building itself.
+                            For example, think of a heavy bookshelf falling over during an earthquake.
+                            An engineer must calculate the force of the bookshelf shaking and design bracing to a ceiling or floor to prevent it from falling over.
+                        </p>
+                        <p>
+                            The calculation of theses forces requires several parameters such as the building height, the weight of the bookshelf, and the seismic zone.
+                            Frequently engineers do these calculations by hand or with a spreadsheet.
+                            Inevitably, this leads to errors and inefficiencies for simple errors or misunderstanding of the building code.
+                            These challenges are increased by the latest update to the building code which made the calculations more complex.
+                            My goal was to create a web application that would make these calculations easy, consistent, and accurate.
+
+                        </p>
+                        <a href="#!"><img class="img-fluid" src="static/assets/img/nonstructural-damage.jpeg" alt="..." /></a>
+                        <span class="caption text-muted">Significant Nonstructural Damage After An Earthquake</span>
+                        <h2 class="section-heading">Tech Stack</h2>
+                        <p>
+                            Building this application taught me a great deal about web development, servers, networks, and security.
+                            The application is built with Flask, a Python web development framework.
+                            The front end is built with HTML, CSS, and JavaScript (JQuery).
+                            The site connects to an AWS RDS database to store user inputs and results.
+                            The application runs on a gunicon server and uses nginx as a reverse proxy.
+                            This was my first time using either of these technologies, and getting them to work together was one of the greatest challenges in the entire project.
+                            Everything is defined in a Dockerfile and docker-compose.yml file, which I then deployed to an AWS EC2 instance.
+                            I purchased a doamin name from AWS Route 53 and pointed it to the instance.
+                            Finally, I used Let's Encrypt to get an SSL certificate and secure the site with HTTPS.
+                        </p>
+                        <h2 class="section-heading">Design</h2>
+                        <p>
+                            My goal was to design a simple application that is easy to use.
+                            The user inputs the building parameters into a form.
+                            I created a table of architectural components that the user can select from to make the inputs easier.
+                            The nonstructural seismic forces are calculated in real time and display in the browser.
+                            If the user wants to save the results, they can use the 'Print' button to save the results to a PDF.
+                            The printout shows all of the inputs, intermediate calculations, and results.
+                            This allows engineers to have confidence in the results and show their work to others.
+                        </p>
+                        <h2 class="section-heading">Next Steps</h2>
+                        <p>
+                            The next steps for this project are to share the application with other engineers and get feedback.
+                            I would love to collaborate with others to add more features to the site.
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+        
+{% endblock %}
