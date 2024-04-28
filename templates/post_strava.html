@@ -26,30 +26,30 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                        <h2 class="section-heading">Heading</h2>
+                        <h2 class="section-heading">Introduction</h2>
                         <p>
                             Next month, I am planning to run a half marathon in San Diego.
                             This will be the second half marathon I have run, so I wanted to compare my training progress to the first.
-                            I track all my runs with the Strava app, so I decided to use the Strava API to pull my run data and create some plots.
-                            I also took park in the Hood to Coast relay on two years, so I wanted to compare my training progress to those years as well.
+                            I track all of my training runs with the Strava app, so I decided to use the Strava API to pull my run data and create some plots.
+                            I also took part in the Hood to Coast running relay two different years, so I wanted to compare my training progress to those years as well.
                         </p>
                         <h2 class="section-heading">Strava API</h2>
                         <p>
                             The first step was to familiarize myself with the Strava API.
-                            It has an extensive documentation that can be found <a href="https://developers.strava.com/docs/getting-started/">here</a>.
+                            It has extensive documentation that can be found <a href="https://developers.strava.com/docs/getting-started/">here</a>.
                             Authentication was challenging, but I was able to get it working with the help of some <a href="https://www.youtube.com/watch?v=sgscChKfGyg">YouTube tutorials</a>.
-                            The process requires several steps and keys that I hadn't come across before.
+                            The process requires several steps and authentication keys that I hadn't come across before.
                         </p>
                         <h2 class="section-heading">Data Processing and Plotting</h2>
                         <p>
-                            Once I was able to pull my run data, I needed to process it and create some plots.
+                            Once I was able to pull my run data, I needed to clean it and create some plots.
                             I used the Python libraries <a href="https://pandas.pydata.org/">pandas</a> and <a href="https://seaborn.pydata.org/">seaborn</a> to process and plot the data.
                         </p>
                         <h2 class="section-heading">Capturing Insights</h2>
                         <p>
-                            The first plot I created showed every run by distance leading up to race day.
+                            My goal was to compare my training progress leading up to each of the four races.
                             This required setting up a .csv table with the list of races.
-                            I then calculated the offest date for each race and considered only the runs leading up to a race.
+                            I then calculated the offset date for each race and considered only the runs in the 120 days leading up to a race.
                         </p>
                         <a href="#!"><img class="img-fluid" src="https://publicstravaplots.s3.us-west-2.amazonaws.com/training_all.png" alt="..." /></a>
                         <span class="caption text-muted">All Runs Leading Up to Race Day</span>
@@ -72,10 +72,8 @@
                             I added a goal for myself to run 366 miles in 2024, which is a mile a day.
                             On the plot, I made a dashed line for this goal and calculated a delta to track my progress.
                         </p>
-
                         <a href="#!"><img class="img-fluid" src="https://publicstravaplots.s3.us-west-2.amazonaws.com/distance_by_year.png" alt="..." /></a>
                         <span class="caption text-muted">Total Distance Run By Year</span>
-
                         <h2 class="section-heading">Deployment</h2>
                         <p>
                             An important piece of this project was to make the plots update nightly and deploy them to the web.
