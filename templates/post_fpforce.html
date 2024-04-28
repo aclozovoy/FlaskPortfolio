@@ -38,8 +38,9 @@
                         </p>
                         <p>
                             The calculation of theses forces requires several parameters such as the building height, the weight of the bookshelf, and the seismic zone.
+                            Structural engineers need to design for these forces when designing a building.
                             Frequently engineers do these calculations by hand or with a spreadsheet.
-                            Inevitably, this leads to errors and inefficiencies for simple errors or misunderstanding of the building code.
+                            Inevitably, this leads to errors, inefficiencies, and misunderstandings of the building code.
                             These challenges are increased by the latest update to the building code which made the calculations more complex.
                             My goal was to create a web application that would make these calculations easy, consistent, and accurate.
 
@@ -55,14 +56,16 @@
                             The application runs on a gunicon server and uses nginx as a reverse proxy.
                             This was my first time using either of these technologies, and getting them to work together was one of the greatest challenges in the entire project.
                             Everything is defined in a Dockerfile and docker-compose.yml file, which I then deployed to an AWS EC2 instance.
-                            I purchased a doamin name from AWS Route 53 and pointed it to the instance.
-                            Finally, I used Let's Encrypt to get an SSL certificate and secure the site with HTTPS.
+                            I purchased a domain name from AWS Route 53 and pointed it to the instance.
+                            Finally, I used <a href="https://letsencrypt.org/">Let's Encrypt</a> to get an SSL certificate and secure the site with HTTPS.
+                            
+
                         </p>
                         <h2 class="section-heading">Design</h2>
                         <p>
                             My goal was to design a simple application that is easy to use.
-                            The user inputs the building parameters into a form.
-                            I created a table of architectural components that the user can select from to make the inputs easier.
+                            I created a clean form for the user to input the building parameters need for the calculation.
+                            Below I included a table of architectural components that the user can select from to make the inputs easier.
                             The nonstructural seismic forces are calculated in real time and display in the browser.
                             If the user wants to save the results, they can use the 'Print' button to save the results to a PDF.
                             The printout shows all of the inputs, intermediate calculations, and results.
